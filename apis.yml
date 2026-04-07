@@ -1,7 +1,10 @@
 aid: ametek
-url: https://raw.githubusercontent.com/api-evangelist/ametek/refs/heads/main/apis.yml
+url: 
+  https://raw.githubusercontent.com/api-evangelist/ametek/refs/heads/main/apis.yml
 modified: '2026-03-23'
 apis: []
 common:
   - type: Website
     url: https://www.ametek.com
+description: >-
+  Our differentiated solutions solve challenges all over the globe.
