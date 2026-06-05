@@ -1,0 +1,123 @@
+{
+  "@context": {
+    "@version": 1.1,
+    "schema": "https://schema.org/",
+    "owl": "https://www.w3.org/2002/07/owl#",
+    "rdfs": "https://www.w3.org/2000/01/rdf-schema#",
+    "xsd": "https://www.w3.org/2001/XMLSchema#",
+    "qudt": "https://qudt.org/schema/qudt/",
+    "ssn": "https://www.w3.org/ns/ssn/",
+    "sosa": "https://www.w3.org/ns/sosa/",
+    "ametek": "https://www.ametek.com/vocab#",
+
+    "Organization": "schema:Organization",
+    "name": "schema:name",
+    "description": "schema:description",
+    "url": "schema:url",
+    "industry": "schema:industryIdentifier",
+    "founder": "schema:founder",
+    "foundingDate": "schema:foundingDate",
+    "numberOfEmployees": "schema:numberOfEmployees",
+    "annualRevenue": "schema:revenue",
+
+    "Instrument": {
+      "@id": "schema:MedicalDevice",
+      "@comment": "General scientific/industrial measurement instrument"
+    },
+    "Sensor": "sosa:Sensor",
+    "Actuator": "sosa:Actuator",
+    "Observation": "sosa:Observation",
+    "ObservableProperty": "sosa:ObservableProperty",
+    "hasFeatureOfInterest": "sosa:hasFeatureOfInterest",
+    "observedProperty": "sosa:observedProperty",
+    "phenomenonTime": "sosa:phenomenonTime",
+    "hasResult": "sosa:hasResult",
+    "madeBySensor": "sosa:madeBySensor",
+
+    "ElectronicInstrument": {
+      "@id": "ametek:ElectronicInstrument",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "Instrument" }
+    },
+    "ElectromechanicalDevice": {
+      "@id": "ametek:ElectromechanicalDevice",
+      "@type": "owl:Class"
+    },
+    "MotionController": {
+      "@id": "ametek:MotionController",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "ametek:ElectromechanicalDevice" }
+    },
+    "PowerManagementUnit": {
+      "@id": "ametek:PowerManagementUnit",
+      "@type": "owl:Class"
+    },
+    "AnalyticalInstrument": {
+      "@id": "ametek:AnalyticalInstrument",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "Instrument" }
+    },
+    "TestMeasurementDevice": {
+      "@id": "ametek:TestMeasurementDevice",
+      "@type": "owl:Class",
+      "rdfs:subClassOf": { "@id": "Instrument" }
+    },
+
+    "measurementRange": {
+      "@id": "ametek:measurementRange",
+      "@type": "qudt:QuantityValue"
+    },
+    "accuracy": {
+      "@id": "ametek:accuracy",
+      "@type": "qudt:QuantityValue"
+    },
+    "resolution": {
+      "@id": "ametek:resolution",
+      "@type": "qudt:QuantityValue"
+    },
+    "samplingRate": {
+      "@id": "ametek:samplingRate",
+      "@type": "qudt:QuantityValue"
+    },
+    "operatingTemperature": {
+      "@id": "ametek:operatingTemperature",
+      "@type": "qudt:QuantityValue"
+    },
+    "powerConsumption": {
+      "@id": "ametek:powerConsumption",
+      "@type": "qudt:QuantityValue"
+    },
+    "communicationProtocol": {
+      "@id": "ametek:communicationProtocol",
+      "@type": "xsd:string"
+    },
+    "calibrationDate": {
+      "@id": "ametek:calibrationDate",
+      "@type": "xsd:date"
+    },
+    "serialNumber": {
+      "@id": "ametek:serialNumber",
+      "@type": "xsd:string"
+    },
+    "modelNumber": {
+      "@id": "ametek:modelNumber",
+      "@type": "xsd:string"
+    },
+    "productLine": {
+      "@id": "ametek:productLine",
+      "@type": "xsd:string"
+    },
+    "businessSegment": {
+      "@id": "ametek:businessSegment",
+      "@type": "xsd:string"
+    },
+    "certifications": {
+      "@id": "ametek:certifications",
+      "@type": "xsd:string"
+    },
+    "targetMarket": {
+      "@id": "ametek:targetMarket",
+      "@type": "xsd:string"
+    }
+  }
+}

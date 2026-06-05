@@ -1,0 +1,149 @@
+vocabulary:
+  name: AMETEK Industrial Technology Vocabulary
+  description: >-
+    Core terminology covering the electronic instruments, electromechanical devices,
+    test and measurement systems, and industrial automation solutions produced and
+    marketed by AMETEK, Inc. across its Electronic Instruments Group (EIG) and
+    Electromechanical Group (EMG) business segments.
+  version: "1.0.0"
+  terms:
+
+    - term: Electronic Instruments Group (EIG)
+      definition: >-
+        AMETEK business segment producing advanced analytical, test and measurement
+        instrumentation for energy, aerospace, power, research, medical, and industrial
+        markets worldwide. Products include process analyzers, precision instruments,
+        and data acquisition systems.
+      tags:
+        - business-segment
+        - instruments
+        - test-and-measurement
+
+    - term: Electromechanical Group (EMG)
+      definition: >-
+        AMETEK business segment delivering automation and precision motion control
+        solutions, highly engineered electrical interconnects, specialty metals, and
+        thermal management systems. Serves aerospace, defense, medical, and industrial
+        automation markets.
+      tags:
+        - business-segment
+        - electromechanical
+        - motion-control
+
+    - term: Precision Motion Control
+      definition: >-
+        High-performance motors, drives, and motion control systems engineered to
+        exacting tolerances for aerospace, defense, medical device, and industrial
+        automation applications where accuracy and reliability are critical.
+      tags:
+        - motion-control
+        - electromechanical
+        - automation
+
+    - term: Test and Measurement Instrumentation
+      definition: >-
+        Precision instruments used to measure, monitor, and analyze electrical,
+        physical, and chemical properties in laboratory, industrial, and field
+        environments. Encompasses oscilloscopes, signal analyzers, power meters,
+        and calibration equipment.
+      tags:
+        - test-and-measurement
+        - instruments
+        - laboratory
+
+    - term: Process Analyzer
+      definition: >-
+        Analytical instrument used for real-time, continuous monitoring of chemical
+        composition, gas content, or physical properties within an industrial process
+        stream. Used in refining, chemical processing, power generation, and
+        environmental monitoring.
+      tags:
+        - analytical-instruments
+        - process-monitoring
+        - energy
+
+    - term: Data Acquisition System (DAQ)
+      definition: >-
+        System that samples signals from physical or electrical phenomena and converts
+        them into digital values for processing, storage, or display. AMETEK DAQ
+        products are used in aerospace testing, structural monitoring, and industrial
+        process control.
+      tags:
+        - data-acquisition
+        - test-and-measurement
+        - aerospace
+
+    - term: Power Management
+      definition: >-
+        Solutions for monitoring, controlling, and optimizing electrical power
+        distribution within complex systems such as data centers, power grids, and
+        aerospace platforms. Includes real-time simulation technology for risk
+        management in power systems.
+      tags:
+        - power-management
+        - energy
+        - data-center
+
+    - term: Calibration
+      definition: >-
+        Process of configuring or verifying an instrument's measurement output against
+        a known standard to ensure accuracy and traceability. AMETEK manufactures
+        precision calibration instruments and reference sources used across metrology
+        and quality control workflows.
+      tags:
+        - calibration
+        - metrology
+        - quality
+
+    - term: Thermal Management
+      definition: >-
+        Engineering discipline and associated components (heat exchangers, cooling
+        systems, specialty alloys) that control temperature within electronic and
+        mechanical systems to ensure reliability and performance in demanding
+        aerospace, defense, and industrial environments.
+      tags:
+        - thermal-management
+        - aerospace
+        - electromechanical
+
+    - term: Specialty Metals
+      definition: >-
+        High-performance alloys and engineered metallic materials manufactured by
+        AMETEK for demanding applications in aerospace, defense, and industrial
+        markets where standard materials are insufficient due to extreme temperature,
+        corrosion, or structural requirements.
+      tags:
+        - materials
+        - aerospace
+        - advanced-manufacturing
+
+    - term: Electrical Interconnect
+      definition: >-
+        Highly engineered connectors, cable assemblies, and related components that
+        provide reliable electrical connections in harsh environments including
+        aerospace, defense, oil and gas, and medical devices.
+      tags:
+        - interconnects
+        - connectors
+        - aerospace
+
+    - term: Condition Monitoring
+      definition: >-
+        Continuous or periodic measurement and analysis of physical parameters
+        (vibration, temperature, pressure) of industrial equipment to detect
+        developing faults and prevent unplanned downtime. Supported by AMETEK
+        sensor and data acquisition products.
+      tags:
+        - condition-monitoring
+        - predictive-maintenance
+        - industrial
+
+    - term: Signal Conditioning
+      definition: >-
+        Electronic processing that converts, amplifies, filters, or isolates sensor
+        signals to make them suitable for digitization or transmission. Used in
+        conjunction with AMETEK measurement instruments and DAQ systems.
+      tags:
+        - signal-conditioning
+        - sensors
+        - measurement
