@@ -7,7 +7,7 @@ description: >-
   business segments: Electronic Instruments Group (EIG) and Electromechanical Group (EMG),
   serving industries including energy, aerospace, power, medical, research, and industrial markets
   with advanced analytical, test and measurement instrumentation, and precision motion control solutions.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Electronic Instruments
   - Test and Measurement
@@ -28,7 +28,7 @@ apis:
       - Electronic Instruments
       - Test and Measurement
       - Industrial
-    image: https://kinlane-productions2.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://www.ametek.com
     humanURL: https://www.ametek.com
     properties:
