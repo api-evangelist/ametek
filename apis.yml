@@ -39,6 +39,8 @@ apis:
       energy, aerospace, power, research, medical, and industrial markets. The company
       does not currently publish a public developer API.
 common:
+  - type: DomainSecurity
+    url: security/ametek-domain-security.yml
   - type: Portal
     url: https://www.ametek.com
   - type: PrivacyPolicy
