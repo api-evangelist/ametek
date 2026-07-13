@@ -3,12 +3,13 @@
   "feeds": [
     {
       "source": "https://www.ametek.com",
-      "feed_url": "https://www.ametek.com/news",
-      "title": "AMETEK News",
+      "feed_url": "https://www.ametek.com/newsroom",
+      "title": "AMETEK Newsroom",
       "saved": 0,
-      "method": "none"
+      "method": "agent-scrape",
+      "error": "parse_failed"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-06-05T00:00:00Z"
+  "fetched": "2026-07-11T11:43:46Z"
 }
