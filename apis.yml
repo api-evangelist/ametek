@@ -7,6 +7,17 @@ description: >-
   business segments: Electronic Instruments Group (EIG) and Electromechanical Group (EMG),
   serving industries including energy, aerospace, power, medical, research, and industrial markets
   with advanced analytical, test and measurement instrumentation, and precision motion control solutions.
+deliveryModel:
+  model: saas
+  open_source: false
+  commercial: true
+  callable_host: false
+  label: Hosted service · you call their endpoint
+  confidence: medium
+  source:
+  - pricing
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: unknown
   onboarding: unknown
