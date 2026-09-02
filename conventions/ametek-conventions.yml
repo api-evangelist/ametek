@@ -1,0 +1,87 @@
+generated: '2026-09-02'
+method: searched
+source: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+provider: AMETEK
+providerId: ametek
+applies_to:
+  - openapi/ametek-powervar-isite-pro-openapi.yml
+docs: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+description: >-
+  Cross-cutting request/response semantics for the AMETEK Powervar iSite PRO REST API, read from
+  AMETEK Powervar's own published REST API definition (A55-00202 REV B, 03/10/2023). This is a
+  read-only, device-embedded monitoring API: three GET operations, no write surface at all.
+authentication:
+  style: HTTP Basic, or a web session token in the x-auth-token header
+  required: true
+  published_statement: >-
+    "Basic Authentication supported. Web session tokens supported using x-auth-token header.
+    Authentication is required for access to all API features."
+  transport: HTTP or HTTPS; HTTP is the factory default
+  see: authentication/ametek-authentication.yml
+versioning:
+  style: uri-path
+  current: v1
+  published_statement: >-
+    "Protocol versioning is built into the URI. Any feature breaking changes implemented in
+    firmware will iterate this protocol versioning. Multiple protocol versions may be available
+    at the same time."
+  parallel_versions: supported
+  see: lifecycle/ametek-lifecycle.yml
+content_negotiation:
+  response_media_type: application/json
+  published_statement: "All response bodies are in JSON format."
+discovery:
+  mechanism: mDNS
+  published_statement: >-
+    "Although not part of the API, mDNS is supported for dynamic discovery."
+  note: >-
+    Notable for an agent: the base host is not a fixed vendor domain but the customer's own
+    adapter, found on the local network by mDNS. There is no cloud endpoint to call.
+forward_compatibility:
+  published_statement: >-
+    "Any non-documented key/value pairs should be treated as for internal use only, and not
+    modified by any party unless explicitly instructed by AMETEK Powervar."
+  guidance: Tolerate unknown response fields; do not depend on or write undocumented keys.
+pagination:
+  supported: false
+  note: >-
+    Not applicable. UpsAlarms returns the complete active-alarm array in one response; the other
+    two operations return a single object. No paging parameters are published.
+field_expansion:
+  supported: false
+metadata:
+  supported: false
+request_tracing:
+  request_id_header: null
+  note: No request-id or correlation header is published.
+error_envelope:
+  documented: false
+  note: >-
+    The definition documents only the 200 success response for each operation. No error envelope,
+    problem+json shape, or 4xx/5xx catalogue is published. See errors/ametek-problem-types.yml —
+    that absence is recorded there rather than guessed at here.
+rate_limit_signaling:
+  headers: []
+  note: No rate-limit headers or limits are published. See rate-limits/ametek-rate-limits.yml.
+idempotency:
+  supported: na
+  reason: >-
+    The API has no write surface. All three published operations are GET, which are inherently
+    safe and idempotent, so there is nothing for an idempotency key to protect. No Idempotency
+    pointer is wired in apis.yml — asserting one for a read-only API would be a false claim.
+dry_run_mode:
+  supported: na
+  reason: No write surface to rehearse.
+reversibility:
+  grade: na
+  reason: >-
+    Read-only API. The three published operations — getUpsStatus, getUpsAlarms, getWhoAreYou —
+    are all GET and change no state, so there is no action for an agent to take back and no
+    reversal window to state. This is an honest not-applicable, not a missing capability.
+  write_surfaces: []
+  note: >-
+    AMETEK Powervar does publish UPS control functions (output on/off, PDU socket control,
+    shutdown and restart) — the alarm catalogue names UpsOffAsRequested, OutputOffAsRequested,
+    ShutdownPending, SystemRestartPending and PduSocketOff1..3 as reportable states. Those
+    controls are NOT exposed in the published REST API definition, which is monitoring-only.
+    No reversal semantics are asserted here because no write operation is published.

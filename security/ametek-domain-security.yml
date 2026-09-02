@@ -1,4 +1,4 @@
-generated: '2026-07-11'
+generated: '2026-09-02'
 method: probed
 source: live DNS/TLS/HTTP probes of apis.yml + OpenAPI hosts
 hosts:
@@ -6,17 +6,18 @@ hosts:
   https: true
   tls_version: TLSv1.3
   cert_expires: Jan 10 23:59:59 2027 GMT
-  hsts: null
+  hsts: true
+  hsts_max_age: 31536000
 domains:
 - domain: ametek.com
   dnssec: false
   caa:
+  - 0 issue "comodoca.com"
+  - 0 issue "digicert.com; cansignhttpexchanges=yes"
   - 0 issue "geotrust.com"
-  - 0 issue "digicert.com"
   - 0 issue "letsencrypt.org"
-  - 0 iodef "mailto:hostmaster@ametek.com"
-  - 128 issue "amazonaws.com"
-  - 128 issue "awstrust.com"
+  - 0 issue "pki.goog; cansignhttpexchanges=yes"
+  - 0 issue "sectigo.com"
   spf: true
   dmarc: true
   dmarc_policy: reject

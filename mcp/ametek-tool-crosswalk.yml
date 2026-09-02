@@ -1,0 +1,43 @@
+generated: '2026-09-02'
+method: derived
+source: openapi/ametek-powervar-isite-pro-openapi.yml
+provider: AMETEK
+providerId: ametek
+description: >-
+  Crosswalk binding the DERIVED candidate MCP tools in mcp/ametek-mcp.yml to their backing OpenAPI
+  operations. AMETEK ships no MCP server and no GraphQL surface, so every binding is one-to-one
+  with a published REST operation and every tool inherits that operation's real (empty) parameter
+  set. Confidence is high because both sides were derived from the same transcribed contract.
+surfaces:
+  openapi: openapi/ametek-powervar-isite-pro-openapi.yml
+  graphql: null
+  mcp: null
+  mcp_note: No MCP server published by AMETEK; tools are candidates, not a live surface.
+  gated: []
+crosswalk:
+  - tool: get_ups_status
+    category: monitoring
+    rest: [getUpsStatus]
+    binding: one-to-one
+    confidence: high
+    note: No parameters or request body — the operation takes none, so the tool's inputSchema is empty.
+  - tool: get_ups_alarms
+    category: monitoring
+    rest: [getUpsAlarms]
+    binding: one-to-one
+    confidence: high
+    note: Returns an array; the 38-value AlarmName enum is the tool's real output vocabulary.
+  - tool: get_adapter_identity
+    category: device-identity
+    rest: [getWhoAreYou]
+    binding: one-to-one
+    confidence: high
+mcp_only: []
+rest_only: []
+coverage:
+  rest_operations: 3
+  tools: 3
+  bound: 3
+  mcp_only: 0
+  rest_only: 0
+  percent_bound: 100

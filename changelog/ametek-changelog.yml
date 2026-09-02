@@ -1,0 +1,40 @@
+generated: '2026-09-02'
+method: searched
+source: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+provider: AMETEK
+providerId: ametek
+scheme: document-revision
+current_version: A55-00202 REV B
+description: >-
+  AMETEK publishes no dated API changelog for any of its developer surfaces. The only version
+  signal available is the revision letter and date on the iSite PRO REST API definition document
+  itself, plus the version stamped on the Crank Storyboard documentation set.
+entries:
+  - version: A55-00202 REV B
+    date: '2023-03-10'
+    surface: AMETEK Powervar iSite PRO REST API
+    breaking: unknown
+    additions: unknown
+    highlights: >-
+      Revision B of the published REST API definition, carrying three operations (UpsStatus,
+      UpsAlarms, whoAreYou), the 38-entry alarm catalogue and the protocol-versioning policy.
+      AMETEK Powervar publishes no diff against Revision A, so what changed between revisions is
+      not recoverable from the public surface.
+    source: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+  - version: Storyboard 9.0.2
+    date: null
+    surface: Crank Storyboard APIs
+    breaking: unknown
+    additions: unknown
+    highlights: >-
+      Version stamped on the current Crank Storyboard documentation set at docs.cranksoftware.com,
+      covering 313 API reference pages across nine API families. No dated release-notes feed is
+      published on the documentation host, so no date can be recorded honestly.
+    source: https://docs.cranksoftware.com/docs/9.0/storyboard/api/storyboard-io-api/
+gap:
+  what_is_missing: A dated, machine-readable changelog for either API surface.
+  remedy: >-
+    Publish a dated changelog page (and ideally a feed) for the iSite PRO protocol version and for
+    each Storyboard release, marking breaking changes. The deprecation policy the REST API
+    definition states — that firmware upgrades will make deprecation explicit — has nowhere public
+    to be announced today.

@@ -4,49 +4,42 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: AMETEK
 providerId: ametek
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-02'
+generated: '2026-09-02'
+method: searched
+source: https://www.powervar.com/products/connectivity-solutions/isite-pro-net-adapter
+reconciled: true
+plan_count: 0
 tags:
   - Electronic Instruments
   - Test and Measurement
   - Industrial
 description: >-
-  AMETEK does not publish a public developer API or pricing catalog. Customer
-  software (instrument control, calibration data, PLM exchange) ships with the
-  underlying hardware or via vendor-specific tooling, and there is no plan
-  tier, metered request price, or enterprise SKU to reconcile.
+  AMETEK publishes no developer plans, no API pricing tiers and no metered request pricing, for
+  any of its brands. This is a checked zero, not an unchecked one.
 notes: >-
-  No public developer plan catalog exists. AMETEK is a hardware-first portfolio
-  of instrument and electromechanical brands; software is bundled or licensed
-  per-device, not per-API-call.
+  The two real AMETEK developer surfaces are both bundled with a purchase rather than sold as an
+  API. The AMETEK Powervar iSite PRO REST API is embedded in a network management card the
+  customer buys and installs — the API is a feature of the hardware, and the customer hosts the
+  endpoint themselves, so there is no per-call price to publish and no vendor infrastructure to
+  meter. Crank Storyboard's APIs ship inside the Storyboard SDK under a commercial product
+  licence quoted by sales, with no public price list. Supersedes the 2026-05-04 bulk-sweep
+  entry, which carried a placeholder "No Public API Program" plan row; a plan row asserting a
+  tier that does not exist is worse than an honest empty list.
 sources:
-  - https://www.ametek.com
-plans:
-  - id: ametek-no-public-api
-    name: No Public API Program
-    type: enterprise
-    description: >-
-      Placeholder entry. AMETEK does not publish developer API tiers.
-      Instrument-level APIs are bundled with hardware purchases under
-      brand-specific licensing.
-    entries:
-      - label: Access
-        description: Bundled with instrument hardware / brand-specific
-        name: access
-        type: flat
-        metric: varies
-        limit: -1
-        timeFrame: usage
-        geo: global
-        unit: 1
-        price: 'see hardware purchase'
-        userMultiplied: false
-    elements:
-      - name: Hardware-Bundled SDK
-      - name: Brand-Specific Licensing
+  - url: https://www.powervar.com/products/connectivity-solutions/isite-pro-net-adapter
+    status: 200
+    checked: '2026-09-02'
+    finding: Product page for the adapter that serves the REST API. No price, no plan, no API tier.
+  - url: https://docs.cranksoftware.com/
+    status: 200
+    checked: '2026-09-02'
+    finding: Crank Storyboard documentation. No pricing page or plan catalogue on the docs host.
+  - url: https://www.ametek.com
+    status: 200
+    checked: '2026-09-02'
+    finding: Corporate site. No developer or API pricing surface of any kind.
+plans: []
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com

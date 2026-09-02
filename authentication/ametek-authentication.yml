@@ -1,0 +1,33 @@
+generated: '2026-09-02'
+method: searched
+source: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+docs: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+note: >-
+  Read from AMETEK Powervar's own published REST API definition (A55-00202 REV B), which states
+  verbatim: "Basic Authentication supported", "Web session tokens supported using x-auth-token
+  header", and "Authentication is required for access to all API features". The OpenAPI in
+  openapi/ was transcribed from that same document, so the spec and the docs are one source.
+  No OAuth2, OIDC or mTLS is published for this surface. Credentials are the adapter's own local
+  administrative credentials, issued by the device, not by an AMETEK-operated identity service.
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: basicAuth
+  type: http
+  scheme: basic
+  description: HTTP Basic Authentication, as published. Authentication is required for access
+    to all API features. Credentials are the adapter's own local administrative credentials.
+  sources:
+  - openapi/ametek-powervar-isite-pro-openapi.yml
+- name: sessionToken
+  type: apiKey
+  in: header
+  parameter: x-auth-token
+  description: Web session token issued by the adapter's own web interface and presented in
+    the `x-auth-token` header, as published.
+  sources:
+  - openapi/ametek-powervar-isite-pro-openapi.yml

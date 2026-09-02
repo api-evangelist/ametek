@@ -1,0 +1,97 @@
+generated: '2026-09-02'
+method: probed
+source: live HTTPS probes of every AMETEK host that carries a documented developer surface
+note: >-
+  No AMETEK host serves any /.well-known/ document. Recorded as an absence, not a presence: no
+  WellKnown or SecurityTxt pointer is wired in apis.yml. www.ametek.com is the important case —
+  it answers HTTP 200 with a 70,317-byte HTML page titled "Custom Error" for EVERY unknown path,
+  including every /.well-known/ path below. That is a soft-404, not a served document, so each
+  row is scored as a miss and carries soft_404: true. www.powervar.com and docs.cranksoftware.com
+  return honest 404s.
+hosts:
+  - host: www.ametek.com
+    note: Soft-404 host — returns 200 + an HTML "Custom Error" page for every unknown path.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        observed_status: 200
+        soft_404: true
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        observed_status: 200
+        soft_404: true
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        observed_status: 200
+        soft_404: true
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        observed_status: 200
+        soft_404: true
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        observed_status: 200
+        soft_404: true
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        observed_status: 200
+        soft_404: true
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        observed_status: 200
+        soft_404: true
+        file: null
+  - host: www.powervar.com
+    note: AMETEK Powervar — the host that publishes the iSite PRO REST API definition.
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null
+  - host: docs.cranksoftware.com
+    note: Crank Storyboard documentation (AMETEK-owned Crank Software).
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+        file: null
+      - path: /.well-known/openid-configuration
+        status: 404
+        file: null
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+        file: null
+      - path: /.well-known/api-catalog
+        status: 404
+        file: null
+      - path: /.well-known/ai-plugin.json
+        status: 404
+        file: null
+      - path: /.well-known/agent-card.json
+        status: 404
+        file: null
+      - path: /.well-known/agent.json
+        status: 404
+        file: null

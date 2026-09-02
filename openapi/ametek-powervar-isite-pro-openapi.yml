@@ -1,0 +1,383 @@
+openapi: 3.1.0
+x-authored-by: API Evangelist
+x-generated-from: documentation
+x-modeled-from: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+x-provenance:
+  method: generated
+  generated: '2026-09-02'
+  source_document: A55-00202 REV B — "Rest API Definition", AMETEK Powervar, Inc., dated 03/10/2023
+  source_url: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+  http_status: 200
+  note: >-
+    Transcribed by API Evangelist from AMETEK Powervar's own published REST API definition PDF.
+    AMETEK Powervar publishes no OpenAPI of its own. Every path, method, header, status code and
+    response field below appears verbatim in that document; nothing has been inferred or invented.
+    Response schemas are typed from the document's worked example bodies. Undocumented behaviour
+    (error responses, rate limits) is deliberately ABSENT rather than guessed.
+info:
+  title: AMETEK Powervar iSite PRO REST API
+  version: v1
+  summary: Read-only REST API embedded in the AMETEK Powervar iSite PRO network management card.
+  description: >-
+    The REST API published by AMETEK Powervar for the iSite PRO network management adapter, a card
+    fitted to Powervar UPS systems for secure remote monitoring. The API is served by the device
+    itself, so the host is the customer's own adapter (discoverable on the LAN via mDNS), not a
+    vendor-operated cloud endpoint.
+
+
+    Documented features, quoted from A55-00202 REV B: HTTP or HTTPS (HTTP by default); Basic
+    Authentication supported; web session tokens supported using the `x-auth-token` header;
+    authentication is required for access to all API features; mDNS is supported for dynamic
+    discovery; all response bodies are in JSON format; protocol versioning is built into the URI,
+    and any feature-breaking change implemented in firmware iterates that protocol version, with
+    multiple protocol versions potentially available at the same time. `v1` is the only supported
+    protocol version defined in the document.
+
+
+    AMETEK Powervar states that any non-documented key/value pairs should be treated as internal
+    use only and not modified by any party unless explicitly instructed by AMETEK Powervar.
+  contact:
+    name: AMETEK Powervar
+    url: https://www.powervar.com
+  x-source-pdf: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+servers:
+  - url: http://{device_host}:{port}/api/v1
+    description: >-
+      The iSite PRO adapter itself. `device_host` is the adapter's own IP address or mDNS hostname
+      (the document's worked examples use an adapter reachable on port 8080 and a hostname of the
+      form isitepro-<serial>). HTTPS is supported; HTTP is the factory default.
+    variables:
+      device_host:
+        default: isitepro.local
+        description: IP address or mDNS hostname of the customer's iSite PRO adapter.
+      port:
+        default: '80'
+        description: HTTP listener port reported by the adapter's own httpd.port field. Examples in the definition use 8080.
+security:
+  - basicAuth: []
+  - sessionToken: []
+tags:
+  - name: UPS Monitoring
+    description: Read the live electrical, battery and load state of the attached UPS.
+  - name: Alarms
+    description: Read the currently active alarm set reported by the UPS.
+  - name: Device Identity
+    description: Identify the adapter itself — model, serial, firmware, network interfaces and httpd state.
+paths:
+  /UpsStatus:
+    get:
+      operationId: getUpsStatus
+      summary: Get UPS status
+      description: >-
+        Returns the current electrical and battery state of the UPS attached to the iSite PRO
+        adapter. No URL parameters, data parameters or request headers beyond authentication.
+      tags: [UPS Monitoring]
+      responses:
+        '200':
+          description: Current UPS status.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/UpsStatus'
+  /UpsAlarms:
+    get:
+      operationId: getUpsAlarms
+      summary: Get active UPS alarms
+      description: >-
+        Returns the array of alarms currently active on the UPS. Each alarm carries a timestamp,
+        a stable machine name, a numeric severity (3 = fault/service required, 2 = warning,
+        1 = informational/state) and a human description. The full set of possible alarm names is
+        enumerated in components/schemas/AlarmName.
+      tags: [Alarms]
+      responses:
+        '200':
+          description: Array of currently active alarms. An empty array means no alarms are active.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alarm'
+  /whoAreYou:
+    get:
+      operationId: getWhoAreYou
+      summary: Identify the adapter
+      description: >-
+        Returns the adapter's own identity and network configuration — model, serial number,
+        manufacturer, current UTC time, firmware version, hostname, every Ethernet interface with
+        its addressing, and the state of the embedded HTTP server.
+
+
+        Note the case difference published in the definition: the URL is documented as
+        `/api/v1/whoAreYou` while the worked example request line reads `GET /api/v1/WhoAreYou`.
+        Both spellings appear in AMETEK Powervar's own document; this spec carries the URL as
+        published in the URL field.
+      tags: [Device Identity]
+      responses:
+        '200':
+          description: Adapter identity and network state.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/WhoAreYou'
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: >-
+        HTTP Basic Authentication, as published. Authentication is required for access to all API
+        features. Credentials are the adapter's own local administrative credentials.
+    sessionToken:
+      type: apiKey
+      in: header
+      name: x-auth-token
+      description: >-
+        Web session token issued by the adapter's own web interface and presented in the
+        `x-auth-token` header, as published.
+  schemas:
+    UpsStatus:
+      type: object
+      title: UpsStatus
+      description: Live UPS state. Field set taken verbatim from the published example response body.
+      properties:
+        BatteryTemperature:
+          type: number
+          description: Battery temperature (degrees Celsius in the published example).
+        BatteryStatus:
+          type: string
+          description: Battery health summary, e.g. "Normal".
+        TotalTimesDepleted:
+          type: integer
+          description: Cumulative count of full battery depletions.
+        TotalMinutesOnBattery:
+          type: integer
+          description: Cumulative minutes the UPS has run on battery.
+        EstimatedChargeRemaining:
+          type: integer
+          description: Estimated remaining charge as a percentage.
+        OutputSource:
+          type: string
+          description: Present output source, e.g. "Normal".
+        OutputPower:
+          type: number
+          description: Present output power.
+        InputLineBads:
+          type: integer
+          description: Cumulative count of bad input line conditions.
+        InputMaxVolts:
+          type: number
+          description: Maximum observed input voltage.
+        InputMinVolts:
+          type: number
+          description: Minimum observed input voltage.
+        OutputFrequency:
+          type: number
+          description: Output frequency in Hz.
+        InputFrequency:
+          type: number
+          description: Input frequency in Hz.
+        SerialNumber:
+          type: string
+          description: UPS serial number.
+        BatteryVoltage:
+          type: number
+          description: Present battery voltage.
+        BatteryCurrent:
+          type: number
+          description: Present battery current.
+        ManufactureDate:
+          type: string
+          description: Manufacture date. Published example uses ISO form YYYY-MM-DD.
+        BatteryReplaceDate:
+          type: string
+          description: Battery replacement date. Published example uses MM/DD/YYYY — note this differs from ManufactureDate.
+        InputVoltage:
+          type: number
+          description: Present input voltage.
+        OutputVoltage:
+          type: number
+          description: Present output voltage.
+        EstimatedMinutesRemaining:
+          type: integer
+          description: Estimated runtime remaining on battery, in minutes.
+        TotalTimesOnBattery:
+          type: integer
+          description: Cumulative count of transfers to battery.
+        UpsUpTime:
+          type: integer
+          description: UPS uptime.
+        OutputPercentLoad:
+          type: number
+          description: Present output load as a percentage of capacity.
+      example:
+        BatteryTemperature: 27
+        BatteryStatus: Normal
+        TotalTimesDepleted: 1
+        TotalMinutesOnBattery: 293
+        EstimatedChargeRemaining: 100
+        OutputSource: Normal
+        OutputPower: 0
+        InputLineBads: 150
+        InputMaxVolts: 122
+        OutputFrequency: 60
+        SerialNumber: 5006003R-1830016
+        BatteryVoltage: 27.3
+        ManufactureDate: '2021-02-01'
+        InputVoltage: 114
+        OutputVoltage: 116
+        BatteryCurrent: 0
+        EstimatedMinutesRemaining: 6000
+        BatteryReplaceDate: 03/01/2021
+        InputFrequency: 60
+        InputMinVolts: 95
+        TotalTimesOnBattery: 150
+        UpsUpTime: 0
+        OutputPercentLoad: 0
+    Alarm:
+      type: object
+      title: Alarm
+      properties:
+        Timestamp:
+          type: string
+          format: date-time
+          description: UTC timestamp the alarm was raised (RFC 3339 / Zulu in the published example).
+        Name:
+          $ref: '#/components/schemas/AlarmName'
+        Severity:
+          type: integer
+          enum: [1, 2, 3]
+          description: >-
+            3 = fault / service required, 2 = warning, 1 = informational or state notice.
+            Severity per alarm name is fixed by the published alarm table.
+        Description:
+          type: string
+          description: Human-readable alarm description as published.
+      example:
+        Timestamp: '2021-07-28T16:28:26Z'
+        Name: UpsOutputOff
+        Severity: 1
+        Description: Output Off
+    AlarmName:
+      type: string
+      title: AlarmName
+      description: >-
+        The complete set of alarm names published in the "all possible alarms" table of
+        A55-00202 REV B.
+      enum:
+        - BackfeedRelayFailure
+        - BatteryDegraded
+        - BatteryFuseBlown
+        - ChargerFailed
+        - DepletedBattery
+        - DiagnosticsTestFailed
+        - FanFailure
+        - FuseFailure
+        - GeneralFault
+        - LostComm
+        - OutputOverload
+        - OverTemperature
+        - ReplaceBattery
+        - ServiceRequired
+        - BypassBad
+        - GeneralWarning
+        - InputOutOfTolerance
+        - LowBattery
+        - OnBattery
+        - OnBypass
+        - OutputBad
+        - PowerMarginExceeded
+        - ShutdownImminent
+        - SiteWiringFault
+        - BatteryCharging
+        - DiagnosticsTestInProgress
+        - OutputOffAsRequested
+        - PduSocketOff1
+        - PduSocketOff2
+        - PduSocketOff3
+        - PduSocketOffPending1
+        - PduSocketOffPending2
+        - PduSocketOffPending3
+        - ShutdownPending
+        - SystemRestartPending
+        - UpsOffAsRequested
+        - UpsOutputOff
+        - UpsSystemOff
+    WhoAreYou:
+      type: object
+      title: WhoAreYou
+      description: Adapter identity and network state. Field set taken verbatim from the published example response body.
+      properties:
+        objType:
+          type: string
+          description: Object discriminator; "whoAreYou" in the published example.
+        model:
+          type: string
+          description: Adapter model, e.g. "iSitePro".
+        serial:
+          type: string
+          description: Adapter serial number.
+        manufacturer:
+          type: string
+          description: Manufacturer; "AMETEK" in the published example.
+        time:
+          type: string
+          format: date-time
+          description: Adapter's current UTC time.
+        firmware:
+          type: string
+          description: Adapter firmware version.
+        hostname:
+          type: string
+          description: Adapter hostname, of the form isitepro-<serial>.
+        ethInterfaces:
+          type: array
+          description: Every Ethernet interface on the adapter.
+          items:
+            $ref: '#/components/schemas/EthInterface'
+        httpd:
+          $ref: '#/components/schemas/HttpdState'
+    EthInterface:
+      type: object
+      title: EthInterface
+      properties:
+        mac:
+          type: string
+          description: Interface MAC address.
+        ifname:
+          type: string
+          description: Interface name, e.g. "eth0".
+        dns:
+          type: array
+          items:
+            type: string
+          description: Configured DNS resolvers.
+        addr:
+          type: string
+          description: Assigned IPv4 address.
+        dhcp:
+          type: boolean
+          description: Whether the address was obtained by DHCP.
+        mask:
+          type: string
+          description: Subnet mask.
+        gw:
+          type: string
+          description: Default gateway.
+    HttpdState:
+      type: object
+      title: HttpdState
+      description: State of the adapter's embedded HTTP server.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the embedded HTTP server is enabled.
+        ssl:
+          type: boolean
+          description: Whether TLS is enabled. HTTP (ssl false) is the factory default.
+        status:
+          type: string
+          description: Server status, e.g. "OK".
+        port:
+          type: integer
+          description: Listener port.

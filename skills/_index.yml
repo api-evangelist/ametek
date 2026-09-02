@@ -1,0 +1,18 @@
+generated: '2026-09-02'
+method: generated
+source: openapi/ametek-powervar-isite-pro-openapi.yml
+provider: AMETEK
+providerId: ametek
+skills:
+  - file: ametek-monitor-ups-health.md
+    name: ametek-monitor-ups-health
+    api: openapi/ametek-powervar-isite-pro-openapi.yml
+    operations: [getWhoAreYou, getUpsStatus, getUpsAlarms]
+    summary: >-
+      Poll an AMETEK Powervar UPS through its iSite PRO adapter for live state, active alarms and
+      adapter identity, with the severity triage and the read-only guardrail spelled out.
+note: >-
+  One skill only. The published AMETEK contract has three read operations and no write surface,
+  so there is exactly one marquee flow to package. No skill is written for Crank Storyboard —
+  its APIs are compiled in-process C/Lua/JavaScript bindings, not callable operations an agent
+  can invoke, so there is no operationId to ground steps in.

@@ -1,0 +1,47 @@
+generated: '2026-09-02'
+method: searched
+source: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+provider: AMETEK
+providerId: ametek
+docs: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+versioning:
+  scheme: uri-path
+  current_version: v1
+  parallel_versions_supported: true
+  published_statement: >-
+    "Protocol versioning is built into the URI. Any feature breaking changes implemented in
+    firmware will iterate this protocol versioning. Multiple protocol versions may be available
+    at the same time. Currently the only supported protocol version is v1 as defined in this
+    document."
+  note: >-
+    Version is bound to device FIRMWARE, not to a hosted service. A fleet of iSite PRO adapters
+    can be running different protocol versions at once, and the operator controls when each one
+    moves by choosing when to apply firmware.
+deprecation_policy:
+  published: true
+  mechanism: firmware release notes
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  published_statement: >-
+    "It will be explicitly clear in firmware upgrades if any version is deprecated, breaking any
+    systems built upon them."
+  note: >-
+    A real, stated deprecation commitment — breaking changes iterate the URI version and
+    deprecation is announced in the firmware upgrade. It is delivered as release-note prose, not
+    as RFC 8594 Deprecation/Sunset response headers, so an agent cannot detect an impending
+    sunset at runtime.
+document_version:
+  id: A55-00202 REV B
+  dated: '2023-03-10'
+  note: Revision B of the REST API definition, the latest AMETEK Powervar publishes.
+deprecated_operations: []
+status_page:
+  published: false
+  note: >-
+    No status page exists and none would be meaningful — the API is served by the customer's own
+    adapter on their own network, so availability is the operator's, not AMETEK's. No StatusPage
+    pointer is wired.
+sla:
+  published: false
+  note: No API SLA is published. Hardware warranty terms are product-level, not API-level.

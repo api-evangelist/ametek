@@ -1,0 +1,63 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements — AMETEK Powervar iSite PRO REST API
+  version: 1.0.0
+x-generated: '2026-09-02'
+x-method: generated
+x-source: openapi/ametek-powervar-isite-pro-openapi.yml
+x-note: >-
+  Records what API Evangelist added on top of AMETEK Powervar's published REST API definition
+  (A55-00202 REV B). The definition is a PDF, not a spec — it names paths, methods, auth, and one
+  worked example body per operation. Everything listed below is structure this pipeline supplied
+  so the contract could exist as OpenAPI at all; none of it is a claim by AMETEK Powervar.
+extends: openapi/ametek-powervar-isite-pro-openapi.yml
+actions:
+  - target: $.info
+    description: >-
+      Added a summary and a description quoting the definition's own feature list, plus contact and
+      x-source-pdf pointing at the source document. AMETEK Powervar publishes no info block.
+  - target: $.servers
+    description: >-
+      Added a templated server http://{device_host}:{port}/api/v1. AMETEK Powervar publishes no
+      base URL — the definition's worked examples show a Host header pointing at a specific
+      adapter on port 8080. The template says what is true: the host is the customer's own device,
+      found by mDNS, and it must be supplied per deployment.
+  - target: $.tags
+    description: >-
+      Added three tags — UPS Monitoring, Alarms, Device Identity — grouping the three operations.
+      The definition has no tag vocabulary.
+  - target: $.paths['/UpsStatus'].get
+    description: >-
+      Added operationId getUpsStatus, a summary and a description. The definition names the request
+      "UpsStatus" but publishes no operationId.
+  - target: $.paths['/UpsAlarms'].get
+    description: >-
+      Added operationId getUpsAlarms plus a description of the severity scale, which the definition
+      states only implicitly through its alarm table.
+  - target: $.paths['/whoAreYou'].get
+    description: >-
+      Added operationId getWhoAreYou, and recorded in the description the case discrepancy in the
+      source document itself — the URL field reads /api/v1/whoAreYou while the worked example
+      request line reads /api/v1/WhoAreYou.
+  - target: $.components.securitySchemes
+    description: >-
+      Formalised the two published auth mechanisms as schemes — basicAuth (http/basic) and
+      sessionToken (apiKey in the x-auth-token header). The definition states both in prose.
+  - target: $.components.schemas.UpsStatus
+    description: >-
+      Typed the 23 fields of the published example response body and wrote a description per field.
+      The definition publishes the example body only, with no schema and no field documentation.
+      Also recorded the date-format inconsistency present in AMETEK Powervar's own example:
+      ManufactureDate is YYYY-MM-DD while BatteryReplaceDate in the same body is MM/DD/YYYY.
+  - target: $.components.schemas.AlarmName
+    description: >-
+      Turned the definition's "all possible alarms" table into a 38-value string enum, preserving
+      every published name.
+  - target: $.components.schemas.Alarm.properties.Severity
+    description: >-
+      Constrained Severity to enum [1,2,3] and documented the meaning of each level, read off the
+      published alarm table where every name carries a fixed severity.
+  - target: $.components.schemas.WhoAreYou
+    description: >-
+      Typed the identity response and split its nested structures into named EthInterface and
+      HttpdState schemas so they are referenceable.

@@ -1,0 +1,33 @@
+generated: '2026-09-02'
+method: searched
+source: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+provider: AMETEK
+providerId: ametek
+spec: openapi/ametek-powervar-isite-pro-openapi.yml
+format: none
+error_count: 0
+description: >-
+  AMETEK Powervar's published REST API definition for the iSite PRO documents ONLY the 200 success
+  response for each of its three operations. It publishes no error catalogue, no status codes other
+  than 200, no problem+json media type and no error envelope shape.
+problem_types: []
+note: >-
+  This is a recorded absence, deliberately not filled in. The definition states that
+  "Authentication is required for access to all API features", which in practice implies a 401 on
+  an unauthenticated call, but AMETEK Powervar does not document that response and this pipeline
+  does not invent status codes it has not seen. An integrator cannot tell from the published
+  contract what an auth failure, a malformed request or a device fault returns.
+gap:
+  what_is_missing: Any documented non-200 response.
+  remedy: >-
+    Publish the 401 (and any 4xx/5xx) responses with their body shape, ideally as RFC 9457
+    application/problem+json, alongside the existing 200 definitions.
+related:
+  operational_conditions:
+    note: >-
+      Not errors, but the closest published equivalent: the UpsAlarms operation returns a
+      first-class catalogue of 38 named device conditions with fixed severities (3 = fault /
+      service required, 2 = warning, 1 = informational). These are UPS state, returned inside a
+      200 response — they are NOT API error responses and must not be treated as such.
+    enumerated_in: openapi/ametek-powervar-isite-pro-openapi.yml#/components/schemas/AlarmName
+    count: 38

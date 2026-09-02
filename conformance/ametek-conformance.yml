@@ -1,0 +1,93 @@
+generated: '2026-09-02'
+method: searched
+source: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+provider: AMETEK
+providerId: ametek
+description: >-
+  Standards conformance for AMETEK's published API surfaces, asserted only where the contract or
+  the provider's own documentation states it.
+standards:
+  - id: rest
+    name: REST over HTTP
+    conforms: true
+    evidence: >-
+      A55-00202 REV B is titled "Rest API Definition" and publishes three resource-oriented GET
+      operations over HTTP/HTTPS returning JSON.
+  - id: http-basic-auth
+    name: HTTP Basic Authentication (RFC 7617)
+    conforms: true
+    evidence: >-
+      "Basic Authentication supported" — A55-00202 REV B section 1.2; the worked examples send an
+      Authorization: Basic header.
+  - id: json
+    name: JSON (RFC 8259)
+    conforms: true
+    evidence: '"All response bodies are in JSON format." — A55-00202 REV B section 1.2.'
+  - id: mdns
+    name: mDNS / DNS-SD service discovery (RFC 6762 / RFC 6763)
+    conforms: true
+    evidence: >-
+      "Although not part of the API, mDNS is supported for dynamic discovery." — A55-00202 REV B
+      section 1.2. The adapter advertises itself on the local network rather than living at a
+      fixed vendor host.
+  - id: rfc3339
+    name: RFC 3339 timestamps
+    conforms: true
+    evidence: >-
+      Alarm Timestamp and whoAreYou time are published in Zulu RFC 3339 form
+      (e.g. "2021-07-28T16:28:26Z"). Note this is NOT uniform across the API — UpsStatus
+      publishes ManufactureDate as "2021-02-01" and BatteryReplaceDate as "03/01/2021" in the
+      same response body.
+  - id: oauth2
+    name: OAuth 2.0
+    conforms: false
+    evidence: No OAuth2 flow, authorization server or scope is published for any AMETEK surface.
+  - id: oidc
+    name: OpenID Connect
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404 on every AMETEK host probed.
+  - id: rfc9457
+    name: RFC 9457 Problem Details
+    conforms: false
+    evidence: >-
+      No error responses of any kind are documented; see errors/ametek-problem-types.yml.
+  - id: idempotency
+    name: Idempotency keys
+    conforms: false
+    evidence: Not applicable — the published API is read-only, three GET operations, no write surface.
+  - id: pagination
+    name: Documented pagination
+    conforms: false
+    evidence: No collection is paged; UpsAlarms returns the complete active-alarm array.
+domain_standards:
+  - id: snmp-ups-mib
+    name: UPS MIB (RFC 1628) field vocabulary
+    conforms: partial
+    evidence: >-
+      The UpsStatus response reproduces the RFC 1628 UPS-MIB object vocabulary almost field for
+      field — BatteryStatus, EstimatedChargeRemaining, EstimatedMinutesRemaining, BatteryVoltage,
+      BatteryCurrent, BatteryTemperature, InputLineBads, InputVoltage, InputFrequency,
+      OutputSource, OutputVoltage, OutputFrequency, OutputPower, OutputPercentLoad — and the alarm
+      names map onto the RFC 1628 upsAlarm well-known alarm identifiers (upsAlarmOnBattery,
+      upsAlarmLowBattery, upsAlarmOutputOverload, upsAlarmChargerFailed, upsAlarmFanFailure,
+      upsAlarmFuseFailure, upsAlarmDepletedBattery, upsAlarmOnBypass, upsAlarmInputBad,
+      upsAlarmOutputBad, upsAlarmShutdownImminent, upsAlarmDiagnosticTestFailed and others).
+      Marked partial rather than true: AMETEK Powervar nowhere CLAIMS RFC 1628 conformance in the
+      REST API definition, and the JSON names are CamelCase re-spellings rather than the MIB
+      object identifiers. This is recorded as an observed vocabulary alignment, not a certified
+      conformance.
+    spec_location: openapi/ametek-powervar-isite-pro-openapi.yml#/components/schemas/UpsStatus
+    reward_only_note: >-
+      Recorded because a monitoring platform that already speaks UPS-MIB can map this API with no
+      bespoke connector. Not asserted as a provider claim.
+compliance_programs: []
+compliance_note: >-
+  No trust center, SOC 2 / ISO 27001 / PCI / HIPAA / FedRAMP attestation page, or published
+  security-certification program was found for AMETEK's developer surfaces. probe-security-programs.py
+  returned vdp=none trust=none on 2026-09-02. No Compliance pointer is wired.
+soap_note: >-
+  Not probed by choice, recorded for honesty: www.ametek.com/robots.txt names two classic ASP.NET
+  SOAP endpoints on the corporate site — /GlobalSearch.asmx and /AmetekServices.asmx — and
+  disallows both. This pipeline honors robots.txt, so neither ?wsdl was fetched and no WSDL is
+  saved. Their names indicate internal site services (site search), not a documented developer
+  contract. Evidence: https://www.ametek.com/robots.txt returned HTTP 200 on 2026-09-02.

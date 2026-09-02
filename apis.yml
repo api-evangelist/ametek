@@ -42,7 +42,7 @@ tags:
   - Manufacturing
   - Fortune 1000
 created: '2024-01-01'
-modified: '2026-04-19'
+modified: '2026-09-02'
 specificationVersion: '0.23'
 apis:
   - aid: ametek:website
@@ -58,22 +58,179 @@ apis:
       - type: Website
         url: https://www.ametek.com
     description: >-
-      AMETEK provides advanced electronic instruments and electromechanical devices for
-      energy, aerospace, power, research, medical, and industrial markets. The company
-      does not currently publish a public developer API.
+      AMETEK provides advanced electronic instruments and electromechanical devices for energy,
+      aerospace, power, research, medical, and industrial markets. The corporate site is not a
+      developer surface: there is no api.ametek.com, no developer.ametek.com and no docs host,
+      and www.ametek.com answers HTTP 200 with an HTML "Custom Error" page for every unknown
+      path, so every /.well-known/ probe against it is a soft-404. AMETEK's real developer
+      surfaces are published by its operating brands and are listed separately below —
+      AMETEK Powervar's iSite PRO REST API and Crank Software's Storyboard API reference.
+  - aid: ametek:powervar-isite-pro
+    name: AMETEK Powervar iSite PRO REST API
+    tags:
+      - Power Management
+      - UPS Monitoring
+      - Data Center
+      - Industrial
+      - Device API
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+    baseURL: http://{device_host}:{port}/api/v1
+    humanURL: https://www.powervar.com/products/connectivity-solutions/isite-pro-net-adapter
+    description: >-
+      Read-only REST API embedded in the AMETEK Powervar iSite PRO network management card, the
+      adapter fitted to Powervar UPS systems for secure remote monitoring. Three GET operations
+      over HTTP or HTTPS returning JSON — live UPS electrical and battery state, the active alarm
+      set drawn from a fixed 38-value catalogue with severities, and adapter identity including
+      firmware and network configuration. HTTP Basic authentication or an x-auth-token web session
+      token; authentication is required for every operation. Protocol version is carried in the
+      URI path at v1, and AMETEK Powervar commits that breaking firmware changes iterate that
+      version and that deprecation is made explicit in firmware upgrades. The host is the
+      customer's own adapter, discovered on the local network by mDNS — there is no vendor cloud
+      endpoint, which is why baseURL is templated.
+    properties:
+      - type: OpenAPI
+        url: openapi/ametek-powervar-isite-pro-openapi.yml
+      - type: Overlay
+        url: overlays/ametek-powervar-isite-pro-overlay.yaml
+      - type: Documentation
+        url: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+      - type: APIReference
+        url: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+      - type: Website
+        url: https://www.powervar.com
+    x-evidence:
+      verified: '2026-09-02'
+      method: fetched the provider's own published API definition
+      url: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+      http_status: 200
+      content_type: application/pdf
+      bytes: 202579
+      document: A55-00202 REV B, "Rest API Definition", (c) AMETEK Powervar, Inc., dated 03/10/2023
+      docs_describe: >-
+        Three named operations with request type, URL, parameters, headers, success code and
+        worked request/response bodies; the auth mechanisms; the JSON media type; the URI
+        versioning and deprecation policy; and a 38-row table of every possible alarm with its
+        severity and description.
+      endpoint_check: >-
+        Not callable by us, and that is a property of the API rather than a gap in the check. The
+        endpoint is the customer's own iSite PRO adapter on their own LAN, reachable by mDNS;
+        AMETEK operates no host to call. The definition's worked examples show a private-network
+        adapter.
+      ownership: >-
+        Served from www.powervar.com under the path /-/media/ametekpowervar/, the document is
+        (C) AMETEK Powervar, Inc. with AMETEK's Waukegan IL, Swindon UK and Naucalpan MX
+        addresses, and the whoAreYou response publishes manufacturer "AMETEK", model "iSitePro".
+        Unambiguously AMETEK's own contract.
+  - aid: ametek:crank-storyboard
+    name: Crank Storyboard APIs
+    tags:
+      - Embedded GUI
+      - Developer Tools
+      - Automotive
+      - Medical Instruments
+      - Industrial
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+    baseURL: null
+    humanURL: https://docs.cranksoftware.com/
+    description: >-
+      The public API reference for Crank Storyboard, the embedded graphical-interface development
+      platform AMETEK acquired with Crank Software. Nine documented API families across 313
+      server-rendered, versioned reference pages at documentation version 9.0.2 — the Storyboard
+      Engine public C API, Storyboard IO (libgreio.a / gre/greio.h) and its wrapper, the Lua API,
+      Lua DOM module, Lua types and Lua canvas APIs, and the JavaScript and JavaScript canvas
+      APIs. These are IN-PROCESS bindings compiled into or scripted inside an embedded
+      application, not a network service: there is no base URL, no HTTP contract and no
+      machine-readable spec, which is why baseURL is null and no OpenAPI is wired.
+    properties:
+      - type: Documentation
+        url: https://docs.cranksoftware.com/
+      - type: APIReference
+        url: https://docs.cranksoftware.com/docs/9.0/category/storyboard-apis
+      - type: GitHubOrganization
+        url: https://github.com/crank-software
+      - type: KnowledgeBase
+        url: https://docs.cranksoftware.com/knowledge-base
+    x-evidence:
+      verified: '2026-09-02'
+      method: fetched and parsed the documentation host and its sitemap
+      url: https://docs.cranksoftware.com/sitemap.xml
+      http_status: 200
+      docs_describe: >-
+        705 sitemap URLs, of which 313 are per-function API reference pages under
+        /docs/9.0/storyboard/api/ — for example gre_io_open, gre_io_send, gre_io_receive and
+        gre_io_serialize under the Storyboard IO API, each documenting a real function signature.
+        Confirmed server-rendered: the fetched HTML carries the function list and prose without
+        script execution.
+      surface_class: >-
+        Library / in-process API, not a callable network endpoint. Listed because the reference
+        genuinely documents an API; deliberately carries no baseURL, no OpenAPI and no agent
+        skill, because there is no operation an agent can invoke over a network.
+      ownership: >-
+        Crank Software was acquired by AMETEK; the documentation and the github.com/crank-software
+        organisation are the brand's own surfaces.
 common:
+  - type: Website
+    url: https://www.ametek.com/
+  - type: Authentication
+    url: authentication/ametek-authentication.yml
   - type: DomainSecurity
     url: security/ametek-domain-security.yml
+  - type: OpenAPI
+    url: openapi/ametek-powervar-isite-pro-openapi.yml
+  - type: Overlay
+    url: overlays/ametek-powervar-isite-pro-overlay.yaml
+  - type: Authentication
+    url: authentication/ametek-authentication.yml
+  - type: Conventions
+    url: conventions/ametek-conventions.yml
+  - type: ErrorCatalog
+    url: errors/ametek-problem-types.yml
+  - type: Lifecycle
+    url: lifecycle/ametek-lifecycle.yml
+  - type: Deprecation
+    url: lifecycle/ametek-lifecycle.yml
+  - type: Conformance
+    url: conformance/ametek-conformance.yml
+  - type: DataModel
+    url: data-model/ametek-data-model.yml
+  - type: MCPServer
+    url: mcp/ametek-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/ametek-tool-crosswalk.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: LLMsTxt
+    url: llms/ametek-llms.txt
+  - type: Packages
+    url: packages/ametek-packages.yml
+  - type: SDKs
+    url: packages/ametek-packages.yml
+  - type: ChangeLog
+    url: changelog/ametek-changelog.yml
+  - type: Plans
+    url: plans/ametek-plans-pricing.yml
+  - type: RateLimits
+    url: rate-limits/ametek-rate-limits.yml
+  - type: GitHubOrganization
+    url: https://github.com/crank-software
+  - type: Documentation
+    url: https://docs.cranksoftware.com/
+  - type: APIReference
+    url: https://docs.cranksoftware.com/docs/9.0/category/storyboard-apis
+  - type: Blog
+    url: https://www.ametek.com/newsroom
+  - type: Careers
+    url: https://www.ametek.com/careers
   - type: Portal
     url: https://www.ametek.com
   - type: PrivacyPolicy
-    url: https://www.ametek.com/privacy-policy
+    url: https://www.ametek.com/privacy
   - type: TermsOfService
     url: https://www.ametek.com/terms-of-use
   - type: Support
-    url: https://www.ametek.com/contact
+    url: https://www.ametek.com/contact-us
   - type: LinkedIn
-    url: https://www.linkedin.com/company/ametek-inc-
+    url: https://www.linkedin.com/company/ametek
   - type: X
     url: https://twitter.com/AMETEKInc
   - type: YouTube
@@ -117,3 +274,9 @@ common:
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com
+
+x-enrichment:
+  date: '2026-09-02'
+  status: enriched
+  artifacts_added: 16
+  pass: local-v1

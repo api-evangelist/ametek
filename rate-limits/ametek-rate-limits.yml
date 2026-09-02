@@ -4,38 +4,41 @@ schema: https://raw.githubusercontent.com/api-evangelist/interface-research/main
 provider: AMETEK
 providerId: ametek
 created: '2026-05-04'
-# Provenance stamped 2026-08-11: this artifact was written by the API Evangelist
-# bulk sweep dated 2026-05-04, not harvested from the provider. See roadmap#35.
-method: generated
-modified: '2026-05-05'
-reconciled: false
+modified: '2026-09-02'
+generated: '2026-09-02'
+method: searched
+source: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+reconciled: true
+limit_count: 0
 tags:
   - Electronic Instruments
   - Test and Measurement
   - Rate Limiting
 description: >-
-  AMETEK does not publish public network-API rate limits. Instrument control
-  APIs are typically bus-speed bound (USB, GPIB, LXI, Ethernet) rather than
-  request-per-second throttled, and behavior is documented per instrument in
-  the brand-specific programmer's manual rather than a central rate-limit
-  policy.
+  AMETEK publishes no rate limits for any of its API surfaces. An honest zero, read from the one
+  document AMETEK Powervar publishes about the API.
 notes: >-
-  No central rate-limit policy. Instrument-specific limits live in each
-  product's programming manual (SCPI command throughput, etc.).
-sources:
-  - https://www.ametek.com
+  A55-00202 REV B ("Rest API Definition") documents each of the three operations in full — request
+  type, URL, URL parameters, data parameters, request headers, success response code, worked
+  request and worked response — and lists no limit, no quota, no throttle and no rate-limit
+  header. Every operation's "Request Headers" field reads N/A, and the only success code published
+  is 200, so there is no 429 either. Nothing about throttling is stated anywhere in the document.
+  Supersedes the 2026-05-04 bulk-sweep entry, which asserted a "Per-Instrument Bus Throughput"
+  limit that AMETEK does not publish.
 responseCodes: {}
-limits:
-  - name: Per-Instrument Bus Throughput
-    scope: device
-    metric: varies
-    limit: 'see instrument programmer manual (SCPI / IVI / LXI)'
-policies:
-  - name: Per-Device Documentation
-    description: >-
-      Throughput, command pacing, and error handling are documented per
-      instrument family by AMETEK's component brands; consult the relevant
-      programmer manual.
+headers: []
+limits: []
+policies: []
+practical_guidance: >-
+  Not a published limit — operational context an integrator needs. The endpoint is an embedded
+  management card on power equipment, served by the customer's own device on their own LAN, not by
+  vendor infrastructure. Polling pressure is bounded by the adapter, so poll conservatively and
+  treat a slow or refused response as a device or network condition rather than as throttling.
+sources:
+  - url: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+    status: 200
+    checked: '2026-09-02'
+    finding: Full API definition; no limits, quotas, headers or 429 documented.
 maintainers:
   - FN: API Evangelist
     email: info@apievangelist.com

@@ -1,0 +1,46 @@
+generated: '2026-09-02'
+method: derived
+source: openapi/ametek-powervar-isite-pro-openapi.yml
+provider: AMETEK
+providerId: ametek
+status: candidate
+description: >-
+  AMETEK publishes no MCP server. This is a DERIVED candidate tool list — one tool per published
+  operation of the AMETEK Powervar iSite PRO REST API — recorded so the agent surface AMETEK could
+  offer is legible. Nothing here is deployed by AMETEK and no endpoint is asserted.
+deployment:
+  mode: none
+  endpoint: null
+  install: null
+  package: null
+  auth: unknown
+  verified: derived
+  note: >-
+    Searched AMETEK's own surfaces (ametek.com, powervar.com, docs.cranksoftware.com), the npm and
+    PyPI registries, and the published API definition on 2026-09-02. No hosted MCP endpoint and no
+    stdio MCP package exists for any AMETEK brand. mode is none and endpoint/install are left
+    empty deliberately — a guessed MCP URL would read as a verified agent surface.
+search_evidence:
+  - probe: npm registry lookup for ametek, powervar, skybitz, crank-storyboard, '@cranksoftware/storyboard'
+    result: 404 on every name
+  - probe: PyPI lookup for ametek, powervar, skybitz
+    result: 404 on every name
+  - probe: /.well-known/ai-plugin.json on www.ametek.com, www.powervar.com, docs.cranksoftware.com
+    result: 404 (soft-404 on www.ametek.com)
+tools:
+  - name: get_ups_status
+    description: Read the live electrical and battery state of a Powervar UPS through its iSite PRO adapter.
+    source_operation: openapi/ametek-powervar-isite-pro-openapi.yml#getUpsStatus
+    status: candidate
+  - name: get_ups_alarms
+    description: List the alarms currently active on a Powervar UPS, with severity and timestamp.
+    source_operation: openapi/ametek-powervar-isite-pro-openapi.yml#getUpsAlarms
+    status: candidate
+  - name: get_adapter_identity
+    description: Identify an iSite PRO adapter — model, serial, firmware, network interfaces and HTTP server state.
+    source_operation: openapi/ametek-powervar-isite-pro-openapi.yml#getWhoAreYou
+    status: candidate
+constraint: >-
+  A hosted MCP server is a poor fit for this API and that is worth stating: the endpoint is the
+  customer's own adapter on their own LAN, discovered by mDNS. Any real MCP server for it would
+  be local-stdio, run inside the network where the adapters live.

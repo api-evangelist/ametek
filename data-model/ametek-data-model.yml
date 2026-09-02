@@ -1,0 +1,79 @@
+generated: '2026-09-02'
+method: derived
+source: openapi/ametek-powervar-isite-pro-openapi.yml
+provider: AMETEK
+providerId: ametek
+description: >-
+  Entity-relationship graph derived from the schemas of the AMETEK Powervar iSite PRO REST API.
+  A small, flat model: the adapter identifies itself, and reports the state and alarms of the one
+  UPS it is fitted to. There are no resource ids, no cross-resource references and no id-prefix
+  scheme — every response is a live read of one device.
+entities:
+  - name: Adapter
+    schema: WhoAreYou
+    description: The iSite PRO network management card itself.
+    identifier: serial
+    fields: [objType, model, serial, manufacturer, time, firmware, hostname]
+    operations: [getWhoAreYou]
+  - name: EthInterface
+    schema: EthInterface
+    description: One Ethernet interface on the adapter.
+    identifier: mac
+    fields: [mac, ifname, dns, addr, dhcp, mask, gw]
+  - name: HttpdState
+    schema: HttpdState
+    description: State of the adapter's embedded HTTP server.
+    fields: [enabled, ssl, status, port]
+  - name: UpsStatus
+    schema: UpsStatus
+    description: Live electrical and battery state of the attached UPS. A snapshot, not a stored record.
+    identifier: SerialNumber
+    operations: [getUpsStatus]
+  - name: Alarm
+    schema: Alarm
+    description: One currently-active UPS condition, drawn from a fixed 38-value catalogue.
+    identifier: Name
+    fields: [Timestamp, Name, Severity, Description]
+    operations: [getUpsAlarms]
+relationships:
+  - from: Adapter
+    to: EthInterface
+    type: has_many
+    via: ethInterfaces
+    evidence: WhoAreYou.ethInterfaces is an array of EthInterface.
+  - from: Adapter
+    to: HttpdState
+    type: has_one
+    via: httpd
+    evidence: WhoAreYou.httpd is a single HttpdState object.
+  - from: Adapter
+    to: UpsStatus
+    type: has_one
+    via: implicit
+    confidence: medium
+    evidence: >-
+      Implicit, not declared by a $ref or an id field. One adapter is fitted to one UPS, and
+      /UpsStatus takes no parameters, so the status returned is always that of the UPS behind the
+      adapter being called. UpsStatus.SerialNumber is the UPS serial and is distinct from
+      WhoAreYou.serial, which is the ADAPTER serial — the two must not be conflated.
+  - from: UpsStatus
+    to: Alarm
+    type: has_many
+    via: implicit
+    confidence: medium
+    evidence: >-
+      Implicit. /UpsAlarms returns the alarms active on the same UPS /UpsStatus describes; there
+      is no foreign key linking them.
+id_scheme:
+  prefixes: []
+  note: >-
+    No id prefixes. Adapter serial is of the form 3000L01-2130001 and UPS serial of the form
+    5006003R-1830016 in the published examples — model-code-and-batch, not API identifiers. There
+    is no resource id an agent can pass back into any operation.
+enumerations:
+  - name: AlarmName
+    values: 38
+    location: openapi/ametek-powervar-isite-pro-openapi.yml#/components/schemas/AlarmName
+  - name: Severity
+    values: [1, 2, 3]
+    meaning: 3 = fault / service required, 2 = warning, 1 = informational or state notice

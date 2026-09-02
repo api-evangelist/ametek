@@ -1,0 +1,125 @@
+generated: '2026-09-02'
+method: searched
+source: npm, PyPI registry metadata endpoints + AMETEK developer surfaces
+provider: AMETEK
+providerId: ametek
+package_count: 2
+official_count: 2
+description: >-
+  AMETEK publishes no first-party client library in any public package REGISTRY — not npm, PyPI,
+  Maven Central, NuGet, pkg.go.dev, RubyGems, Packagist or crates.io. It does publish two
+  first-party libraries as SOURCE, from the github.com/crank-software organisation belonging to
+  AMETEK's Crank Software brand. Those are recorded below with the currency data GitHub reports.
+packages:
+  - name: storyboard-lua
+    official: true
+    brand: Crank Software (AMETEK)
+    language: lua
+    registry: github
+    url: https://github.com/crank-software/storyboard-lua
+    description: Common Lua modules used with Crank Storyboard projects.
+    version: v8.0.0
+    published: '2023-05-02'
+    version_source: https://api.github.com/repos/crank-software/storyboard-lua/releases
+    checked: '2026-09-02'
+    decay_signal: >-
+      DECAY. The latest release is v8.0.0 from 2023-05-02, while the shipping product documented
+      at docs.cranksoftware.com is version 9.0.2. The first-party Lua module set is a full major
+      version behind the API it is meant to be used with, and has had no release in over three
+      years. The previous release was v7.1.0 on 2021-12-23, so the cadence was already roughly
+      annual before it stopped.
+  - name: crank_sbio_extensions_python
+    official: true
+    brand: Crank Software (AMETEK)
+    language: python
+    registry: github
+    url: https://github.com/crank-software/crank_sbio_extensions_python
+    description: >-
+      Extensions that wrap the Storyboard IO (SBIO) interface for Python. The nearest thing
+      AMETEK has to a conventional client library for a Storyboard application's IO channel.
+    version: null
+    published: null
+    last_pushed: '2024-08-21'
+    version_source: https://api.github.com/repos/crank-software/crank_sbio_extensions_python/releases
+    checked: '2026-09-02'
+    note: >-
+      Checked, nothing to record for version. The repository has NO releases and NO tags, and it
+      is not published to PyPI, so there is no version a consumer can pin and no published date to
+      report. `published` is null because the repo has never cut a release, not because the check
+      was skipped. Last commit activity 2024-08-21.
+      A consumer can only pin a git SHA.
+github_organization:
+  url: https://github.com/crank-software
+  name: Crank Software
+  http_status: 200
+  public_repos: 10
+  created: '2017-12-05'
+  checked: '2026-09-02'
+  note: >-
+    The only public GitHub organisation belonging to any AMETEK brand that was found. There is no
+    github.com/ametek and no github.com/cranksoftware (both 404 on the GitHub API). Ten public
+    repos, mostly Storyboard sample/demo/benchmark projects plus Sketch and Figma design plugins;
+    the two entries above are the ones that are libraries rather than samples.
+searched:
+  - registry: npm
+    endpoint: https://registry.npmjs.org/<pkg>
+    names: [ametek, powervar, skybitz, crank-storyboard, '@cranksoftware/storyboard']
+    result: 404 on every name
+    checked: '2026-09-02'
+  - registry: npm
+    endpoint: https://registry.npmjs.org/storyboard
+    names: [storyboard]
+    result: >-
+      200, but NOT AMETEK. The npm package "storyboard" (version 3.3.2) is an unrelated
+      hierarchical logging library. Explicitly excluded — a name collision, not a Crank Software
+      release.
+    checked: '2026-09-02'
+  - registry: pypi
+    endpoint: https://pypi.org/pypi/<pkg>/json
+    names: [ametek, powervar, skybitz]
+    result: 404 on every name
+    checked: '2026-09-02'
+  - registry: pypi
+    endpoint: https://pypi.org/pypi/storyboard/json
+    names: [storyboard]
+    result: 200, but an unrelated project; not published by Crank Software or AMETEK. Excluded.
+    checked: '2026-09-02'
+distribution_note: >-
+  AMETEK's developer artifacts are not distributed through package registries. Crank Storyboard —
+  AMETEK's embedded-GUI product — ships its APIs as a compiled C library (libgreio.a with the
+  gre/greio.h header), a Lua module, and a JavaScript engine binding, all delivered inside the
+  Storyboard SDK download rather than via npm, PyPI or Maven. The iSite PRO REST API has no client
+  library at all; it is called directly over HTTP. Neither surface has a registry metadata endpoint
+  to query, so version and published dates are recorded as null below rather than guessed.
+undistributed_libraries:
+  - name: libgreio (Storyboard IO)
+    product: Crank Storyboard
+    language: c
+    registry: null
+    version: null
+    published: null
+    official: true
+    docs: https://docs.cranksoftware.com/docs/9.0/storyboard/api/storyboard-io-api/
+    note: >-
+      Checked, nothing to record. Distributed inside the Storyboard SDK, not published to any
+      registry, so there is no metadata endpoint that reports a version or a release date. The
+      documentation set is versioned 9.0.2, which dates the docs, not the artifact.
+  - name: Storyboard Lua API
+    product: Crank Storyboard
+    language: lua
+    registry: null
+    version: null
+    published: null
+    official: true
+    docs: https://docs.cranksoftware.com/docs/9.0/storyboard/api/storyboard-lua-api/
+    note: Checked; not on LuaRocks or any registry. Ships with the Storyboard SDK.
+  - name: Storyboard JavaScript API
+    product: Crank Storyboard
+    language: javascript
+    registry: null
+    version: null
+    published: null
+    official: true
+    docs: https://docs.cranksoftware.com/docs/9.0/storyboard/api/storyboard-javascript-api/
+    note: >-
+      Checked; not on npm. An engine-embedded JavaScript binding, not a distributable module.
