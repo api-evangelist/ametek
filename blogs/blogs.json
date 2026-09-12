@@ -2,16 +2,22 @@
   "repo": "ametek",
   "feeds": [
     {
-      "source": "https://www.ametek.com",
-      "feed_url": "https://www.ametek.com/newsroom",
-      "title": "AMETEK Newsroom",
+      "source": "https://docs.cranksoftware.com/docs/9.0/category/storyboard-apis",
+      "feed_url": "https://docs.cranksoftware.com/docs/9.0/category/storyboard-apis",
+      "title": "",
       "saved": 0,
-      "method": "agent-scrape",
-      "error": "parse_failed"
+      "method": "none"
+    },
+    {
+      "source": "https://www.ametek.com/newsroom",
+      "feed_url": "https://www.ametek.com/newsroom",
+      "title": "",
+      "saved": 0,
+      "method": "none"
     }
   ],
   "post_count": 0,
-  "fetched": "2026-08-30T22:05:13Z",
+  "fetched": "2026-09-06T19:17:18Z",
   "feed_nature": "vendor-blog",
   "feed_nature_basis": "path_blog",
   "feed_nature_note": "Whether these posts are the vendor publishing or its support community, decided on the URL path grammar of the saved posts -- not the hostname, which carries both on Khoros, and not author diversity, which flags large vendor blogs as forums. 'undetermined' means undetermined."
