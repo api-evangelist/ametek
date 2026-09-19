@@ -30,6 +30,10 @@ accessModel:
   generated: '2026-07-22'
   method: derived
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/ametek.png
+x-docs-platform: docusaurus
+x-docs-platform-confidence: medium
+x-docs-platform-checked: 2026-09-18
+x-docs-hosting: azure-static
 tags:
 - Electronic Instruments
 - Test and Measurement
