@@ -1,0 +1,24 @@
+{
+  "provider": "ametek",
+  "sources": [
+    "_original/ametek-powervar-isite-pro-openapi.yml"
+  ],
+  "outputs": [
+    "ametek-alarms-api-openapi.yml",
+    "ametek-device-identity-api-openapi.yml",
+    "ametek-ups-monitoring-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "ametek-powervar-isite-pro-openapi.yml: upgraded openapi 3.1.0 -> OpenAPI 3.2.0",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "ametek-alarms-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ametek-device-identity-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "ametek-ups-monitoring-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
+}

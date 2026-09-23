@@ -1,7 +1,9 @@
 ---
 title: Enabling Artificial Intelligence through advanced ...
 url: https://www.ametek.com/our-stories/stories/innovation/2023/august/ametek-enabling-ai
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Ametek" press release artificial intelligence'
 position: 1
 source: serpapi-google

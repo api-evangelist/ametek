@@ -1,7 +1,9 @@
 ---
 title: Looking Toward the Future of Deep Learning
 url: https://www.ametekaegis.com/resources/blog/2019/december/looking-toward-the-future-of-deep-learning
-date: '2026-05-25'
+published: ''
+date_basis: harvested
+harvested: '2026-05-25'
 query: '"Ametek" press release artificial intelligence'
 position: 3
 source: serpapi-google

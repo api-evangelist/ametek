@@ -1,0 +1,133 @@
+openapi: 3.2.0
+info:
+  title: AMETEK Powervar iSite PRO REST Alarms API
+  version: v1
+  summary: Read-only REST API embedded in the AMETEK Powervar iSite PRO network management card.
+  description: The REST API published by AMETEK Powervar for the iSite PRO network management adapter, a card fitted to Powervar UPS systems for secure remote monitoring.
+  contact:
+    name: AMETEK Powervar
+    url: https://www.powervar.com
+  x-source-pdf: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+servers:
+- url: http://{device_host}:{port}/api/v1
+  description: The iSite PRO adapter itself. `device_host` is the adapter's own IP address or mDNS hostname (the document's worked examples use an adapter reachable on port 8080 and a hostname of the form isitepro-<serial>). HTTPS is supported; HTTP is the factory default.
+  variables:
+    device_host:
+      default: isitepro.local
+      description: IP address or mDNS hostname of the customer's iSite PRO adapter.
+    port:
+      default: '80'
+      description: HTTP listener port reported by the adapter's own httpd.port field. Examples in the definition use 8080.
+security:
+- basicAuth: []
+- sessionToken: []
+tags:
+- name: Alarms
+  description: Read the currently active alarm set reported by the UPS.
+paths:
+  /UpsAlarms:
+    get:
+      operationId: getUpsAlarms
+      summary: Get active UPS alarms
+      description: Returns the array of alarms currently active on the UPS. Each alarm carries a timestamp, a stable machine name, a numeric severity (3 = fault/service required, 2 = warning, 1 = informational/state) and a human description. The full set of possible alarm names is enumerated in components/schemas/AlarmName.
+      tags:
+      - Alarms
+      responses:
+        '200':
+          description: Array of currently active alarms. An empty array means no alarms are active.
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Alarm'
+components:
+  schemas:
+    Alarm:
+      type: object
+      title: Alarm
+      properties:
+        Timestamp:
+          type: string
+          format: date-time
+          description: UTC timestamp the alarm was raised (RFC 3339 / Zulu in the published example).
+        Name:
+          $ref: '#/components/schemas/AlarmName'
+        Severity:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          description: 3 = fault / service required, 2 = warning, 1 = informational or state notice. Severity per alarm name is fixed by the published alarm table.
+        Description:
+          type: string
+          description: Human-readable alarm description as published.
+      example:
+        Timestamp: '2021-07-28T16:28:26Z'
+        Name: UpsOutputOff
+        Severity: 1
+        Description: Output Off
+    AlarmName:
+      type: string
+      title: AlarmName
+      description: The complete set of alarm names published in the "all possible alarms" table of A55-00202 REV B.
+      enum:
+      - BackfeedRelayFailure
+      - BatteryDegraded
+      - BatteryFuseBlown
+      - ChargerFailed
+      - DepletedBattery
+      - DiagnosticsTestFailed
+      - FanFailure
+      - FuseFailure
+      - GeneralFault
+      - LostComm
+      - OutputOverload
+      - OverTemperature
+      - ReplaceBattery
+      - ServiceRequired
+      - BypassBad
+      - GeneralWarning
+      - InputOutOfTolerance
+      - LowBattery
+      - OnBattery
+      - OnBypass
+      - OutputBad
+      - PowerMarginExceeded
+      - ShutdownImminent
+      - SiteWiringFault
+      - BatteryCharging
+      - DiagnosticsTestInProgress
+      - OutputOffAsRequested
+      - PduSocketOff1
+      - PduSocketOff2
+      - PduSocketOff3
+      - PduSocketOffPending1
+      - PduSocketOffPending2
+      - PduSocketOffPending3
+      - ShutdownPending
+      - SystemRestartPending
+      - UpsOffAsRequested
+      - UpsOutputOff
+      - UpsSystemOff
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+      description: HTTP Basic Authentication, as published. Authentication is required for access to all API features. Credentials are the adapter's own local administrative credentials.
+    sessionToken:
+      type: apiKey
+      in: header
+      name: x-auth-token
+      description: Web session token issued by the adapter's own web interface and presented in the `x-auth-token` header, as published.
+x-authored-by: API Evangelist
+x-generated-from: documentation
+x-modeled-from: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+x-provenance:
+  method: generated
+  generated: '2026-09-02'
+  source_document: A55-00202 REV B — "Rest API Definition", AMETEK Powervar, Inc., dated 03/10/2023
+  source_url: https://www.powervar.com/-/media/ametekpowervar/pdf/products/connectivity-solutions/isite-pro/user-manuals/a55-00202-rev-b-isite-pro-rest-api-definition.pdf
+  http_status: 200
+  note: Transcribed by API Evangelist from AMETEK Powervar's own published REST API definition PDF. AMETEK Powervar publishes no OpenAPI of its own. Every path, method, header, status code and response field below appears verbatim in that document; nothing has been inferred or invented. Response schemas are typed from the document's worked example bodies. Undocumented behaviour (error responses, rate limits) is deliberately ABSENT rather than guessed.
