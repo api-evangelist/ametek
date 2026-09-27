@@ -49,13 +49,13 @@ modified: '2026-09-16'
 specificationVersion: '0.23'
 apis:
 - aid: ametek:website
+  x-published: false
   name: AMETEK Website
   tags:
   - Electronic Instruments
   - Test and Measurement
   - Industrial
   image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-  baseURL: https://www.ametek.com
   humanURL: https://www.ametek.com
   properties:
   - type: Website
@@ -112,7 +112,6 @@ apis:
   name: AMETEK Alarms API
   description: Read the currently active alarm set reported by the UPS.
   humanURL: https://www.ametek.com
-  baseURL: https://www.ametek.com
   tags:
   - Alarms
   properties:
@@ -128,7 +127,6 @@ apis:
   name: AMETEK Device Identity API
   description: Identify the adapter itself — model, serial, firmware, network interfaces and httpd state.
   humanURL: https://www.ametek.com
-  baseURL: https://www.ametek.com
   tags:
   - Device Identity
   properties:
@@ -144,7 +142,6 @@ apis:
   name: AMETEK UPS Monitoring API
   description: Read the live electrical, battery and load state of the attached UPS.
   humanURL: https://www.ametek.com
-  baseURL: https://www.ametek.com
   tags:
   - UPS Monitoring
   properties:

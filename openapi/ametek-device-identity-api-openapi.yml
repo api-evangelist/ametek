@@ -44,6 +44,33 @@ paths:
                 $ref: '#/components/schemas/WhoAreYou'
 components:
   schemas:
+    EthInterface:
+      type: object
+      title: EthInterface
+      properties:
+        mac:
+          type: string
+          description: Interface MAC address.
+        ifname:
+          type: string
+          description: Interface name, e.g. "eth0".
+        dns:
+          type: array
+          items:
+            type: string
+          description: Configured DNS resolvers.
+        addr:
+          type: string
+          description: Assigned IPv4 address.
+        dhcp:
+          type: boolean
+          description: Whether the address was obtained by DHCP.
+        mask:
+          type: string
+          description: Subnet mask.
+        gw:
+          type: string
+          description: Default gateway.
     WhoAreYou:
       type: object
       title: WhoAreYou
@@ -78,33 +105,6 @@ components:
             $ref: '#/components/schemas/EthInterface'
         httpd:
           $ref: '#/components/schemas/HttpdState'
-    EthInterface:
-      type: object
-      title: EthInterface
-      properties:
-        mac:
-          type: string
-          description: Interface MAC address.
-        ifname:
-          type: string
-          description: Interface name, e.g. "eth0".
-        dns:
-          type: array
-          items:
-            type: string
-          description: Configured DNS resolvers.
-        addr:
-          type: string
-          description: Assigned IPv4 address.
-        dhcp:
-          type: boolean
-          description: Whether the address was obtained by DHCP.
-        mask:
-          type: string
-          description: Subnet mask.
-        gw:
-          type: string
-          description: Default gateway.
     HttpdState:
       type: object
       title: HttpdState

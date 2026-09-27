@@ -43,31 +43,6 @@ paths:
                   $ref: '#/components/schemas/Alarm'
 components:
   schemas:
-    Alarm:
-      type: object
-      title: Alarm
-      properties:
-        Timestamp:
-          type: string
-          format: date-time
-          description: UTC timestamp the alarm was raised (RFC 3339 / Zulu in the published example).
-        Name:
-          $ref: '#/components/schemas/AlarmName'
-        Severity:
-          type: integer
-          enum:
-          - 1
-          - 2
-          - 3
-          description: 3 = fault / service required, 2 = warning, 1 = informational or state notice. Severity per alarm name is fixed by the published alarm table.
-        Description:
-          type: string
-          description: Human-readable alarm description as published.
-      example:
-        Timestamp: '2021-07-28T16:28:26Z'
-        Name: UpsOutputOff
-        Severity: 1
-        Description: Output Off
     AlarmName:
       type: string
       title: AlarmName
@@ -111,6 +86,31 @@ components:
       - UpsOffAsRequested
       - UpsOutputOff
       - UpsSystemOff
+    Alarm:
+      type: object
+      title: Alarm
+      properties:
+        Timestamp:
+          type: string
+          format: date-time
+          description: UTC timestamp the alarm was raised (RFC 3339 / Zulu in the published example).
+        Name:
+          $ref: '#/components/schemas/AlarmName'
+        Severity:
+          type: integer
+          enum:
+          - 1
+          - 2
+          - 3
+          description: 3 = fault / service required, 2 = warning, 1 = informational or state notice. Severity per alarm name is fixed by the published alarm table.
+        Description:
+          type: string
+          description: Human-readable alarm description as published.
+      example:
+        Timestamp: '2021-07-28T16:28:26Z'
+        Name: UpsOutputOff
+        Severity: 1
+        Description: Output Off
   securitySchemes:
     basicAuth:
       type: http
