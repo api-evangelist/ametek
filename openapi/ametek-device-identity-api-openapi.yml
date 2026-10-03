@@ -71,6 +71,23 @@ components:
         gw:
           type: string
           description: Default gateway.
+    HttpdState:
+      type: object
+      title: HttpdState
+      description: State of the adapter's embedded HTTP server.
+      properties:
+        enabled:
+          type: boolean
+          description: Whether the embedded HTTP server is enabled.
+        ssl:
+          type: boolean
+          description: Whether TLS is enabled. HTTP (ssl false) is the factory default.
+        status:
+          type: string
+          description: Server status, e.g. "OK".
+        port:
+          type: integer
+          description: Listener port.
     WhoAreYou:
       type: object
       title: WhoAreYou
@@ -105,23 +122,6 @@ components:
             $ref: '#/components/schemas/EthInterface'
         httpd:
           $ref: '#/components/schemas/HttpdState'
-    HttpdState:
-      type: object
-      title: HttpdState
-      description: State of the adapter's embedded HTTP server.
-      properties:
-        enabled:
-          type: boolean
-          description: Whether the embedded HTTP server is enabled.
-        ssl:
-          type: boolean
-          description: Whether TLS is enabled. HTTP (ssl false) is the factory default.
-        status:
-          type: string
-          description: Server status, e.g. "OK".
-        port:
-          type: integer
-          description: Listener port.
   securitySchemes:
     basicAuth:
       type: http
