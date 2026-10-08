@@ -154,6 +154,8 @@ apis:
   - type: Website
     url: https://www.powervar.com
 common:
+- type: FinOps
+  url: finops/ametek-finops.yml
 - type: Website
   url: https://www.ametek.com/
 - type: Authentication
