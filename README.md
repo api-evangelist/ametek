@@ -1,4 +1,4 @@
-# AMETEK (ametek)
+# AMETEK
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -66,76 +66,135 @@
 
 AMETEK is a leading global manufacturer of electronic instruments and electromechanical devices with annual sales of over $6 billion. The company operates through two differentiated business segments: Electronic Instruments Group (EIG) and Electromechanical Group (EMG), serving industries including energy, aerospace, power, medical, research, and industrial markets with advanced analytical, test and measurement instrumentation, and precision motion control solutions.
 
-**URL:** [https://www.ametek.com](https://www.ametek.com)
+**Areas:** Electronic Instruments · Test and Measurement · Aerospace · Energy · Industrial · Medical Instruments · Precision Motion Control · Manufacturing · Fortune 1000
 
-**Run:** [Capabilities Using Naftiko](https://github.com/naftiko/fleet?utm_source=api-evangelist&utm_medium=readme&utm_campaign=company-api-evangelist&utm_content=repo)
+## AMETEK on APIs.io
 
-## Tags:
+Everything profiled for AMETEK is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/ametek/](https://apis.io/providers/ametek/)** — or go straight to one of the APIs or properties below.
 
- - Electronic Instruments, Test and Measurement, Aerospace, Energy, Industrial, Medical Instruments, Precision Motion Control, Manufacturing
+### APIs (5)
 
-## Timestamps
+- [AMETEK Website](https://apis.io/apis/ametek/website/) — AMETEK provides advanced electronic instruments and electromechanical devices for energy, aerospace, power, research, medical, and industrial markets. The…
+- [Crank Storyboard APIs](https://apis.io/apis/ametek/crank-storyboard/) — The public API reference for Crank Storyboard, the embedded graphical-interface development platform AMETEK acquired with Crank Software. Nine documented…
+- [AMETEK Alarms API](https://apis.io/apis/ametek/ametek-alarms-api/) — Read the currently active alarm set reported by the UPS.
+- [AMETEK Device Identity API](https://apis.io/apis/ametek/ametek-device-identity-api/) — Identify the adapter itself — model, serial, firmware, network interfaces and httpd state.
+- [AMETEK UPS Monitoring API](https://apis.io/apis/ametek/ametek-ups-monitoring-api/) — Read the live electrical, battery and load state of the attached UPS.
 
-- **Created:** 2024-01-01
-- **Modified:** 2026-04-19
+### Published properties
 
-## APIs
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-### AMETEK Website
-AMETEK provides advanced electronic instruments and electromechanical devices for energy, aerospace, power, research, medical, and industrial markets. The company does not currently publish a public developer API.
+#### MCP servers (1)
 
-**Human URL:** [https://www.ametek.com](https://www.ametek.com)
+Model Context Protocol servers that expose the API to agents.
 
-#### Tags:
+- [ametek-mcp.yml](https://apis.io/servers/ametek/ametek-mcp-yml/)
 
- - Electronic Instruments, Test and Measurement, Industrial
+#### JSON-LD (1)
 
-#### Properties
+Linked-data contexts for the provider's vocabulary.
 
-- [Website](https://www.ametek.com)
+- [Ametek Context](https://apis.io/jsonld/ametek/ametek-context/)
 
-## Common Properties
+#### Vocabulary (1)
 
-- [Portal](https://www.ametek.com)
-- [PrivacyPolicy](https://www.ametek.com/privacy-policy)
-- [TermsOfService](https://www.ametek.com/terms-of-use)
-- [Support](https://www.ametek.com/contact)
-- [LinkedIn](https://www.linkedin.com/company/ametek-inc-)
-- [X](https://twitter.com/AMETEKInc)
-- [YouTube](https://www.youtube.com/ametek)
+The provider's domain terms, defined.
 
-## Features
+- [AMETEK Industrial Technology Vocabulary](https://apis.io/vocabularies/ametek/ametek-vocabulary/)
 
-| Name | Description |
-|------|-------------|
-| Electronic Instruments Group | Advanced analytical, test and measurement instrumentation for energy, aerospace, power, research, medical, and industrial markets worldwide. |
-| Electromechanical Group | Automation and precision motion control solutions, highly engineered electrical interconnects, specialty metals, and thermal management systems. |
-| Data Center Power Management | Complex energy management solutions for data center operators including real-time simulation technology for power systems risk management. |
-| Precision Motion Control | High-performance motors, drives, and motion control systems for aerospace, defense, medical, and industrial automation applications. |
-| Advanced Materials | Specialty metals, engineered materials, and thermal management components for demanding applications in aerospace, defense, and industrial markets. |
-| Test and Measurement Instruments | Precision instruments for measuring electrical, physical, and chemical properties in laboratory, industrial, and field environments. |
-| Process Monitoring and Control | Real-time process monitoring and control instrumentation for energy production, chemical processing, and manufacturing industries. |
+#### Overlays (1)
 
-## Use Cases
+OpenAPI overlays, including conversational phrasing for each operation.
 
-| Name | Description |
-|------|-------------|
-| Aerospace and Defense Testing | Test and measurement instrumentation for aerospace and defense component and system validation across critical performance parameters. |
-| Energy Industry Monitoring | Process monitoring and analytical instrumentation for oil and gas, power generation, and renewable energy applications. |
-| Medical Device Manufacturing | Precision motion control and specialized components supporting medical device manufacturers and healthcare equipment applications. |
-| Industrial Automation | Electromechanical devices and precision motion control for factory automation, robotics, and industrial process control. |
-| Research and Laboratory Analysis | Advanced analytical instruments for scientific research, quality control, and materials characterization in laboratory environments. |
-| Data Center Infrastructure | Power management and monitoring solutions for data center operators managing complex energy and thermal challenges. |
+- [Ametek Powervar Isite Pro Overlay](https://apis.io/overlays/ametek/ametek-powervar-isite-pro-overlay/)
 
-## Integrations
+#### Security (2)
 
-| Name | Description |
-|------|-------------|
-| Aerospace and Defense Supply Chain | Integrated supplier to major aerospace and defense OEMs providing precision components and subsystems for aircraft and defense systems. |
-| Energy Industry Partners | Solutions integrated with oil and gas, power generation, and utilities for real-time process monitoring and control. |
+Authentication, trust centre, and vulnerability disclosure.
 
-## Maintainers
+- [Ametek Authentication](https://apis.io/security/ametek/ametek-authentication/)
+- [Ametek Domain Security](https://apis.io/security/ametek/ametek-domain-security/)
 
-**FN:** API Evangelist
+#### Plans and pricing (1)
 
-**Email:** info@apievangelist.com
+Published plans, tiers and prices.
+
+- [Ametek Plans Pricing](https://apis.io/plans/ametek/ametek-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Ametek Rate Limits](https://apis.io/rate-limits/ametek/ametek-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Ametek Finops](https://apis.io/finops/ametek/ametek-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.ametek.com/)
+- [Documentation](https://docs.cranksoftware.com/)
+- [API reference](https://docs.cranksoftware.com/docs/9.0/category/storyboard-apis)
+- [Support](https://www.ametek.com/contact-us)
+- [Blog](https://www.ametek.com/newsroom)
+- [Terms of service](https://www.ametek.com/terms-of-use)
+- [Privacy policy](https://www.ametek.com/privacy)
+- [GitHub](https://github.com/crank-software)
+
+## API Evangelist rating
+
+**Kin Score 32.5** — thin · rubric 0.24.0 · scored 2026-10-17
+
+| Facet | Score |
+|---|---|
+| Discoverability | 57.1 |
+| Contract quality | 20.2 |
+| Contract governance | 18.2 |
+| Operational transparency | 26.3 |
+| Developer ergonomics | 54.2 |
+| Access clarity | 21.1 |
+
+**Agent readiness 25.2** — agent-aware
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | — |
+| Reversibility Documented | na |
+| MCP Server | — |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | na |
+| Error Semantics | documented (partial credit) |
+| OpenAPI Examples | — |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | derived (partial credit) |
+| Well Known Catalog | — |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | na |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 20.5** — Energy & Utilities
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/ametek/](https://apis.io/providers/ametek/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for AMETEK: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/ametek/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
